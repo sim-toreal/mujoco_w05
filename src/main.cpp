@@ -154,9 +154,11 @@ int main(int argc, const char** argv) {
   cam.distance = 5;
   cam.lookat[2] = 2;
 
+  SwingController::init_controller(m, d);
   mjcb_control = SwingController::controller;
 
-  d->qpos[0] = 0.5;
+  // starting in -1, 0
+  d->qpos[0] = -1;
 
   // run main loop, target real-time simulation and 60 fps rendering
   while (!glfwWindowShouldClose(window)) {
