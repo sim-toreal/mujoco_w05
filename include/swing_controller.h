@@ -7,6 +7,7 @@
 #pragma once
 
 #include <mujoco/mujoco.h>
+#include <iostream>
 
 namespace SwingController {
     const int fsm_hold = 0;
@@ -18,11 +19,21 @@ namespace SwingController {
     const double t_swing1 = 1;
     const double t_swing2 = 1;
 
-    extern int fsm_state;
+    struct A {
+      double a0[2] = {0};
+      double a1[2] = {0};
+      double a2[2] = {0};
+      double a3[2] = {0};
+    };
 
-    void init_controller(const mjModel* m, mjData* d);
+  extern int fsm_state;
+  extern A a;
+
+  void init_controller(const mjModel* m, mjData* d);
 
     void controller(const mjModel* m, mjData* d);
+
+    A generate_trajectory(double t0, double tf, double q_0[2], double q_f[2]);
 }
 
 #endif //W05_SWING_CONTROLLER_H
